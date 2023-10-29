@@ -5,13 +5,13 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import page.TestPage;
+import page.StepTestPage;
 
 import static io.qameta.allure.Allure.step;
 
 
-public class StepTest extends ConfigTest {
-    TestPage testPage = new TestPage();
+public class StepTest extends TestBase {
+    StepTestPage stepTestPage = new StepTestPage();
     TestData testData = new TestData();
 
     @Test
@@ -20,13 +20,13 @@ public class StepTest extends ConfigTest {
     @Severity(SeverityLevel.NORMAL)
     void stepTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        step("Open page https://github.com", () -> testPage.openPage());
-        step("Searching rep" + testData.SEARCH_TEXT, () -> testPage.clickSearch()
+        step("Open page https://github.com", () -> stepTestPage.openPage());
+        step("Searching rep" + testData.SEARCH_TEXT, () -> stepTestPage.clickSearch()
                 .setValue(testData.SEARCH_TEXT)
                 .openSearchElement(testData.SEARCH_TEXT));
-        step("Open tab Issues", () -> testPage.clickIssues());
-        step("Open Issues" + testData.ISSUE_NAME, () -> testPage.openIssuesElement(testData.ISSUE_NAME));
-        step("Checking name of Issue" + testData.ISSUE_NAME, () -> testPage.checkResult(testData.ISSUE_NAME));
+        step("Open tab Issues", () -> stepTestPage.clickIssues());
+        step("Open Issues" + testData.ISSUE_NAME, () -> stepTestPage.openIssuesElement(testData.ISSUE_NAME));
+        step("Checking name of Issue" + testData.ISSUE_NAME, () -> stepTestPage.checkResult(testData.ISSUE_NAME));
     }
 
     @Test

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import page.TestPage;
 
 
-public class ListenerTest extends ConfigTest {
+public class ListenerTest extends TestBase {
     TestPage testPage = new TestPage();
     TestData testData = new TestData();
 

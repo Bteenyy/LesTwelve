@@ -1,35 +1,35 @@
 
 import io.qameta.allure.Step;
-import page.TestPage;
+import page.WebStepTestPage;
 
 
-public class WebSteps{
-    TestPage testPage = new TestPage();
+public class WebSteps {
+    WebStepTestPage webStepTestPage = new WebStepTestPage();
 
     @Step("Open page https://github.com")
     public void openPage() {
-        testPage.openPage();
+        webStepTestPage.openPage();
     }
 
     @Step("Searching rep {value}")
     public void searchingRep(String value) {
-        testPage.clickSearch()
+        webStepTestPage.clickSearch()
                 .setValue(value)
                 .openSearchElement(value);
     }
 
     @Step("Open tab Issues")
     public void openTabIssues() {
-        testPage.clickIssues();
+        webStepTestPage.clickIssues();
     }
 
     @Step("Open Issues {value}")
     public void openIssues(String value) {
-        testPage.openIssuesElement(value);
+        webStepTestPage.openIssuesElement(value);
     }
 
     @Step("Checking name of Issue {value}")
     public void checkingNameOfIssue(String value) {
-        testPage.checkResult(value);
+        webStepTestPage.checkResult(value);
     }
 }
