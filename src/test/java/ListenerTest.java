@@ -5,11 +5,14 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import page.TestPage;
-
+import page.*;
 
 public class ListenerTest extends TestBase {
-    TestPage testPage = new TestPage();
+    MainPage mainPage = new MainPage();
+    SearchResultsPage searchResultsPage = new SearchResultsPage();
+    RepositoryPage repositoryPage = new RepositoryPage();
+    IssuesListPage issuesListPage = new IssuesListPage();
+    IssuePage issuePage = new IssuePage();
     TestData testData = new TestData();
 
     @Test
@@ -18,12 +21,12 @@ public class ListenerTest extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     void listenerTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        testPage.openPage()
+        mainPage.openPage()
                 .clickSearch()
-                .setValue(testData.SEARCH_TEXT)
-                .openSearchElement(testData.SEARCH_TEXT)
-                .clickIssues()
-                .openIssuesElement(testData.ISSUE_NAME)
-                .checkResult(testData.ISSUE_NAME);
+                .setValue(testData.SEARCH_TEXT);
+        searchResultsPage.openSearchElement(testData.SEARCH_TEXT);
+        repositoryPage.clickIssues();
+        issuesListPage.openIssuesElement(testData.ISSUE_NAME);
+        issuePage.checkResult(testData.ISSUE_NAME);
     }
 }

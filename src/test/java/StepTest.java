@@ -5,13 +5,17 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import page.StepTestPage;
+import page.*;
 
 import static io.qameta.allure.Allure.step;
 
 
 public class StepTest extends TestBase {
-    StepTestPage stepTestPage = new StepTestPage();
+    MainPage mainPage = new MainPage();
+    SearchResultsPage searchResultsPage = new SearchResultsPage();
+    RepositoryPage repositoryPage = new RepositoryPage();
+    IssuesListPage issuesListPage = new IssuesListPage();
+    IssuePage issuePage = new IssuePage();
     TestData testData = new TestData();
 
     @Test
@@ -20,13 +24,13 @@ public class StepTest extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     void stepTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        step("Open page https://github.com", () -> stepTestPage.openPage());
-        step("Searching rep" + testData.SEARCH_TEXT, () -> stepTestPage.clickSearch()
-                .setValue(testData.SEARCH_TEXT)
-                .openSearchElement(testData.SEARCH_TEXT));
-        step("Open tab Issues", () -> stepTestPage.clickIssues());
-        step("Open Issues" + testData.ISSUE_NAME, () -> stepTestPage.openIssuesElement(testData.ISSUE_NAME));
-        step("Checking name of Issue" + testData.ISSUE_NAME, () -> stepTestPage.checkResult(testData.ISSUE_NAME));
+        step("Open page https://github.com", () -> mainPage.openPage());
+        step("Сlick on search bar", () -> mainPage.clickSearch());
+        step("Set value" + testData.SEARCH_TEXT + "on search bar", () -> mainPage.setValue(testData.SEARCH_TEXT));
+        step("Open element" + testData.SEARCH_TEXT, () -> searchResultsPage.openSearchElement(testData.SEARCH_TEXT));
+        step("Open tab Issues", () -> repositoryPage.clickIssues());
+        step("Open Issues" + testData.ISSUE_NAME, () -> issuesListPage.openIssuesElement(testData.ISSUE_NAME));
+        step("Checking name of Issue" + testData.ISSUE_NAME, () -> issuePage.checkResult(testData.ISSUE_NAME));
     }
 
     @Test
@@ -37,7 +41,9 @@ public class StepTest extends TestBase {
         SelenideLogger.addListener("allure", new AllureSelenide());
         WebSteps webSteps = new WebSteps();
         webSteps.openPage();
-        webSteps.searchingRep(testData.SEARCH_TEXT);
+        webSteps.clickSearchBar();
+        webSteps.setValueSearch(testData.SEARCH_TEXT);
+        webSteps.openElement(testData.SEARCH_TEXT);
         webSteps.openTabIssues();
         webSteps.openIssues(testData.ISSUE_NAME);
         webSteps.checkingNameOfIssue(testData.ISSUE_NAME);
