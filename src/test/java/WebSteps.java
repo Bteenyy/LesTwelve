@@ -3,7 +3,7 @@ import io.qameta.allure.Step;
 import page.TestPage;
 
 
-public class WebStepTest {
+public class WebSteps{
     TestPage testPage = new TestPage();
 
     @Step("Open page https://github.com")

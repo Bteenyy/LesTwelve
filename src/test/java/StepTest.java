@@ -35,12 +35,12 @@ public class StepTest extends ConfigTest {
     @Severity(SeverityLevel.NORMAL)
     void webStepTests() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        WebStepTest webStepTest = new WebStepTest();
-        webStepTest.openPage();
-        webStepTest.searchingRep(testData.SEARCH_TEXT);
-        webStepTest.openTabIssues();
-        webStepTest.openIssues(testData.ISSUE_NAME);
-        webStepTest.checkingNameOfIssue(testData.ISSUE_NAME);
+        WebSteps webSteps = new WebSteps();
+        webSteps.openPage();
+        webSteps.searchingRep(testData.SEARCH_TEXT);
+        webSteps.openTabIssues();
+        webSteps.openIssues(testData.ISSUE_NAME);
+        webSteps.checkingNameOfIssue(testData.ISSUE_NAME);
 
     }
 
